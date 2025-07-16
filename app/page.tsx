@@ -59,7 +59,7 @@ export default function Home() {
           )}
         </>
       )}
-      {forecast && !loading && !error && <Forecast forecast={forecast} />}
+      {forecast && !loading && !error && <Forecast forecast={forecast} aqi={weather?.aqi} />}
       <footer className="mt-6 sm:mt-10 text-xs text-zinc-500 dark:text-zinc-400 text-center px-4">Powered by OpenWeatherMap API</footer>
     </div>
   );

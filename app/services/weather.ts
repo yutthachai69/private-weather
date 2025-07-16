@@ -7,7 +7,7 @@ const FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
 const AIR_POLLUTION_URL = "https://api.openweathermap.org/data/2.5/air_pollution";
 
 // คำนวณ AQI จากข้อมูลฝุ่น
-function calculateAQI(pm25: number, pm10: number): number {
+function calculateAQI(pm25: number): number {
   // ใช้ PM2.5 เป็นหลักในการคำนวณ AQI
   if (pm25 <= 12) return Math.round((pm25 / 12) * 50);
   if (pm25 <= 35.4) return Math.round(51 + ((pm25 - 12.1) / (35.4 - 12.1)) * 49);
@@ -25,9 +25,9 @@ export async function fetchAirQuality(lat: number, lon: number): Promise<number 
     const data = await res.json();
     
     if (data.list && data.list[0] && data.list[0].components) {
-      const { pm2_5, pm10 } = data.list[0].components;
+      const { pm2_5 } = data.list[0].components;
       if (pm2_5 !== undefined) {
-        return calculateAQI(pm2_5, pm10 || pm2_5);
+        return calculateAQI(pm2_5);
       }
     }
     return undefined;

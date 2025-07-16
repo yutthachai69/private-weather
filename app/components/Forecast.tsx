@@ -4,6 +4,7 @@ import { ForecastResponse, ForecastItem } from "../types/weather";
 
 interface ForecastProps {
   forecast: ForecastResponse;
+  aqi?: number;
 }
 
 function groupForecastByDay(forecast: ForecastResponse) {
@@ -36,7 +37,7 @@ function groupForecastByDay(forecast: ForecastResponse) {
   });
 }
 
-const Forecast: React.FC<ForecastProps> = ({ forecast }) => {
+const Forecast: React.FC<ForecastProps> = ({ forecast, aqi }) => {
   const daily = groupForecastByDay(forecast).slice(0, 5);
   const [modal, setModal] = useState<{ open: boolean; day?: typeof daily[0] }>({ open: false });
 
@@ -91,9 +92,11 @@ const Forecast: React.FC<ForecastProps> = ({ forecast }) => {
                   <span className="w-14">💧 {item.main.humidity}%</span>
                   <span className="w-14">☁️ {item.clouds?.all ?? 0}%</span>
                   <span className="w-18">🌂 {item.pop !== undefined ? Math.round(item.pop * 100) : 0}%</span>
+                  <span className="w-18">🫧 AQI: {aqi !== undefined ? aqi : "-"}</span>
                 </div>
               ))}
             </div>
+            <div className="text-xs text-zinc-500 mt-2 text-center">* ค่าฝุ่น (AQI) นี้เป็นค่าปัจจุบันจากสถานีใกล้เคียง</div>
           </div>
         </div>
       )}
