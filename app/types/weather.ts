@@ -3,6 +3,7 @@ export interface WeatherData {
   temperature: number;
   description: string;
   icon: string;
+  aqi?: number; // Air Quality Index
 }
 
 export interface OpenWeatherResponse {
@@ -13,6 +14,24 @@ export interface OpenWeatherResponse {
   weather: Array<{
     description: string;
     icon: string;
+  }>;
+  components?: {
+    pm2_5?: number;
+    pm10?: number;
+    no2?: number;
+    so2?: number;
+    o3?: number;
+    co?: number;
+  };
+  list?: Array<{
+    components: {
+      pm2_5?: number;
+      pm10?: number;
+      no2?: number;
+      so2?: number;
+      o3?: number;
+      co?: number;
+    };
   }>;
 }
 

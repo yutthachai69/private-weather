@@ -41,22 +41,22 @@ const Forecast: React.FC<ForecastProps> = ({ forecast }) => {
   const [modal, setModal] = useState<{ open: boolean; day?: typeof daily[0] }>({ open: false });
 
   return (
-    <div className="w-full max-w-2xl mt-8">
-      <h2 className="text-lg font-semibold mb-4">พยากรณ์อากาศ 5 วันข้างหน้า</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
+    <div className="w-full max-w-2xl mt-6 sm:mt-8 px-2 sm:px-0">
+      <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-center">พยากรณ์อากาศ 5 วันข้างหน้า</h2>
+      <div className="grid grid-cols-5 gap-2 sm:gap-4">
         {daily.map(day => (
           <div
             key={day.date}
-            className="rounded-lg p-4 flex flex-col items-center cursor-pointer forecast-card transition-transform duration-200 hover:scale-105 hover:shadow-2xl active:scale-95"
+            className="rounded-lg p-2 sm:p-4 flex flex-col items-center cursor-pointer forecast-card transition-transform duration-200 hover:scale-105 hover:shadow-2xl active:scale-95"
             style={{ background: 'linear-gradient(135deg, #e0f7fa 60%, #b3e5fc 100%)', color: '#0d47a1', boxShadow: '0 4px 24px 0 #00bcd433', border: '1.5px solid #b3e5fc' }}
             onClick={() => setModal({ open: true, day })}
           >
-            <div className="font-bold mb-1">{new Date(day.date).toLocaleDateString("th-TH", { weekday: "short", day: "numeric", month: "short" })}</div>
-            <img src={`https://openweathermap.org/img/wn/${day.icon}@2x.png`} alt={day.description} className="w-12 h-12" />
-            <div className="text-lg font-semibold">{day.max}° / {day.min}°C</div>
-            <div className="text-xs text-zinc-600 text-center mb-1">{day.description}</div>
+            <div className="font-bold mb-1 text-xs sm:text-sm">{new Date(day.date).toLocaleDateString("th-TH", { weekday: "short", day: "numeric", month: "short" })}</div>
+            <img src={`https://openweathermap.org/img/wn/${day.icon}@2x.png`} alt={day.description} className="w-8 h-8 sm:w-12 sm:h-12" />
+            <div className="text-sm sm:text-lg font-semibold">{day.max}° / {day.min}°C</div>
+            <div className="text-xs text-zinc-600 text-center mb-1 hidden sm:block">{day.description}</div>
             <div className="text-xs text-blue-700">ฝน: {day.rain.toFixed(1)} mm</div>
-            <div className="text-xs text-cyan-700">ความชื้น: {day.humidity}%</div>
+            <div className="text-xs text-cyan-700">ชื้น: {day.humidity}%</div>
             <div className="text-xs text-yellow-700">เมฆ: {day.clouds}%</div>
             <div className="text-xs text-indigo-700">โอกาสฝนตก: {day.pop}%</div>
           </div>
