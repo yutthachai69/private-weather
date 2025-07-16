@@ -1,21 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 40%, #ffffff 70%, #90caf9 100%);
+  --foreground: #0d47a1;
+  --accent: #00bcd4;
+  --accent-dark: #008ba3;
+  --card-bg: #e3f7fdcc; /* ฟ้าครามอ่อนโปร่งใส */
+  --card-bg-dark: #1976d2cc; /* ฟ้าครามเข้มโปร่งใส */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-card-bg: var(--card-bg);
+  --color-card-bg-dark: var(--card-bg-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: linear-gradient(135deg, #1565c0 0%, #4fc3f7 60%, #e3f2fd 100%);
+    --foreground: #e3f2fd;
+    --accent: #4fc3f7;
+    --accent-dark: #0288d1;
+    --card-bg: #4fc3f7cc;
+    --card-bg-dark: #1976d2cc;
   }
 }
 
@@ -23,4 +35,67 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
+button, .btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+button:hover, .btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+.card, .weather-card, .forecast-card {
+  background: var(--card-bg);
+  color: var(--foreground);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px 0 #00bcd433;
+  backdrop-filter: blur(2px);
+}
+@media (prefers-color-scheme: dark) {
+  .card, .weather-card, .forecast-card {
+    background: var(--card-bg-dark);
+    color: var(--foreground);
+    box-shadow: 0 4px 24px 0 #0288d144;
+  }
+}
+
+input, select {
+  background: #e3f7fd;
+  color: #0d47a1;
+  border: 1px solid #b3e5fc;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}
+input:focus, select:focus {
+  outline: 2px solid var(--accent);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+.text-accent-dark {
+  color: var(--accent-dark);
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #1565c0;
+  background: rgba(255,255,255,0.92);
+  padding: 0.7rem 2rem;
+  border-radius: 1.5rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px 0 rgba(33,150,243,0.18), 0 2px 8px 0 rgba(0,0,0,0.10);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 1px 0 #fff;
+  border: 2.5px solid #4fc3f7;
 }
