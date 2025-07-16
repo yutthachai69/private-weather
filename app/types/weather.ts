@@ -15,24 +15,10 @@ export interface OpenWeatherResponse {
     description: string;
     icon: string;
   }>;
-  components?: {
-    pm2_5?: number;
-    pm10?: number;
-    no2?: number;
-    so2?: number;
-    o3?: number;
-    co?: number;
+  coord?: {
+    lat: number;
+    lon: number;
   };
-  list?: Array<{
-    components: {
-      pm2_5?: number;
-      pm10?: number;
-      no2?: number;
-      so2?: number;
-      o3?: number;
-      co?: number;
-    };
-  }>;
 }
 
 // สำหรับ 5 day / 3 hour forecast
