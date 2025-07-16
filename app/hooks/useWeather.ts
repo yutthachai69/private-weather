@@ -9,13 +9,13 @@ function getCacheKey(type: "weather" | "forecast", lat: number, lon: number) {
   return `cache_${type}_${lat}_${lon}`;
 }
 
-function saveCache(type: "weather" | "forecast", lat: number, lon: number, data: any) {
+function saveCache(type: "weather" | "forecast", lat: number, lon: number, data: unknown) {
   const key = getCacheKey(type, lat, lon);
   const value = JSON.stringify({ data, ts: Date.now() });
   localStorage.setItem(key, value);
 }
 
-function loadCache(type: "weather" | "forecast", lat: number, lon: number) {
+function loadCache(type: "weather" | "forecast", lat: number, lon: number): unknown | null {
   const key = getCacheKey(type, lat, lon);
   const value = localStorage.getItem(key);
   if (!value) return null;
@@ -45,8 +45,8 @@ export function useWeather(defaultCity: string) {
       const data = await fetchWeather(city);
       setWeather(data);
       setForecast(null);
-    } catch (err: any) {
-      setError(err.message || "เกิดข้อผิดพลาด");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "เกิดข้อผิดพลาด");
       setWeather(null);
       setForecast(null);
     } finally {
@@ -58,7 +58,7 @@ export function useWeather(defaultCity: string) {
     setLoading(true);
     setError(null);
     // ลองโหลด cache ก่อน
-    const cached = loadCache("weather", lat, lon);
+    const cached = loadCache("weather", lat, lon) as WeatherData | null;
     if (cached) {
       setWeather(cached);
       setLoading(false);
@@ -69,8 +69,8 @@ export function useWeather(defaultCity: string) {
       setWeather(data);
       setForecast(null);
       saveCache("weather", lat, lon, data);
-    } catch (err: any) {
-      setError(err.message || "เกิดข้อผิดพลาด");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "เกิดข้อผิดพลาด");
       setWeather(null);
       setForecast(null);
     } finally {
@@ -82,7 +82,7 @@ export function useWeather(defaultCity: string) {
     setLoading(true);
     setError(null);
     // ลองโหลด cache ก่อน
-    const cached = loadCache("forecast", lat, lon);
+    const cached = loadCache("forecast", lat, lon) as ForecastResponse | null;
     if (cached) {
       setForecast(cached);
       setLoading(false);
@@ -92,16 +92,13 @@ export function useWeather(defaultCity: string) {
       const data = await fetchForecastByLatLon(lat, lon);
       setForecast(data);
       saveCache("forecast", lat, lon, data);
-    } catch (err: any) {
-      setError(err.message || "เกิดข้อผิดพลาด");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "เกิดข้อผิดพลาด");
       setForecast(null);
     } finally {
       setLoading(false);
     }
   };
-
-  // ดึงข้อมูลเมืองเริ่มต้น
-  // useEffect(() => { getWeather(defaultCity); }, [defaultCity]);
 
   return { weather, forecast, loading, error, getWeather, getWeatherByLatLon, getForecastByLatLon };
 } 
