@@ -9,7 +9,7 @@ import { useWeather } from "./hooks/useWeather";
 import { Subdistrict } from "./types/rayongLocations";
 
 export default function Home() {
-  const { weather, forecast, loading, error, getWeather, getWeatherByLatLon, getForecastByLatLon } = useWeather("ระยอง");
+  const { weather, forecast, loading, error, getWeather, getWeatherByLatLon, getForecastByLatLon } = useWeather();
   const [selectedLocationName, setSelectedLocationName] = useState<string>("ระยอง");
   const [isNearby, setIsNearby] = useState<boolean>(false);
   const [nearbyCity, setNearbyCity] = useState<string>("");

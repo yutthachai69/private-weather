@@ -32,7 +32,7 @@ function loadCache(type: "weather" | "forecast", lat: number, lon: number): unkn
   }
 }
 
-export function useWeather(defaultCity: string) {
+export function useWeather() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [forecast, setForecast] = useState<ForecastResponse | null>(null);
   const [loading, setLoading] = useState(false);
