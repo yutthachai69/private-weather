@@ -9,15 +9,14 @@ import { useWeather } from "./hooks/useWeather";
 import { Subdistrict } from "./types/rayongLocations";
 
 export default function Home() {
-  const defaultCity = "ระยอง";
-  const { weather, forecast, loading, error, getWeather, getWeatherByLatLon, getForecastByLatLon } = useWeather(defaultCity);
-  const [selectedLocationName, setSelectedLocationName] = useState<string>(defaultCity);
+  const { weather, forecast, loading, error, getWeather, getWeatherByLatLon, getForecastByLatLon } = useWeather("ระยอง");
+  const [selectedLocationName, setSelectedLocationName] = useState<string>("ระยอง");
   const [isNearby, setIsNearby] = useState<boolean>(false);
   const [nearbyCity, setNearbyCity] = useState<string>("");
 
   useEffect(() => {
-    getWeather(defaultCity);
-    setSelectedLocationName(defaultCity);
+    getWeather("ระยอง");
+    setSelectedLocationName("ระยอง");
     setIsNearby(false);
     setNearbyCity("");
     // eslint-disable-next-line
