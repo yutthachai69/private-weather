@@ -50,7 +50,6 @@ export default function Home() {
             temperature={weather.temperature}
             description={weather.description}
             icon={weather.icon}
-            aqi={weather.aqi}
           />
           {isNearby && (
             <div className="mt-2 text-xs text-yellow-400 text-center px-4">
@@ -59,7 +58,7 @@ export default function Home() {
           )}
         </>
       )}
-      {forecast && !loading && !error && <Forecast forecast={forecast} aqi={weather?.aqi} />}
+      {forecast && !loading && !error && <Forecast forecast={forecast} />}
       <footer className="mt-6 sm:mt-10 text-xs text-zinc-500 dark:text-zinc-400 text-center px-4">Powered by OpenWeatherMap API</footer>
     </div>
   );
